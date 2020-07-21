@@ -21,11 +21,11 @@ RUN wget https://cf.10xgenomics.com/misc/bamtofastq-1.2.0 && \
     chmod 700 bamtofastq-1.2.0 && \
     mv bamtofastq-1.2.0 /usr/bin/
 
+ENV PATH /usr/bin/bamtofastq-1.2.0:$PATH
+
 ENV TINI_VERSION v0.16.1
 ADD https://github.com/krallin/tini/releases/download/${TINI_VERSION}/tini /usr/bin/tini
 RUN chmod +x /usr/bin/tini
-
-ENV PATH /usr/bin/bamtofastq-1.2.0:$PATH
 
 ENTRYPOINT [ "/usr/bin/tini", "--" ]
 CMD [ "/bin/bash" ]
