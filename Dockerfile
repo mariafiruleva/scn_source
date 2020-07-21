@@ -9,13 +9,15 @@ RUN apt-get update --fix-missing && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
-RUN wget --quiet https://repo.anaconda.com/miniconda/Miniconda3-4.5.11-Linux-x86_64.sh -O ~/miniconda.sh && \
+RUN wget --quiet https://repo.anaconda.com/miniconda/Miniconda2-latest-Linux-ppc64le.sh -O ~/miniconda.sh && \
     /bin/bash ~/miniconda.sh -b -p /opt/conda && \
     rm ~/miniconda.sh && \
     /opt/conda/bin/conda clean -tipsy && \
     ln -s /opt/conda/etc/profile.d/conda.sh /etc/profile.d/conda.sh && \
     echo ". /opt/conda/etc/profile.d/conda.sh" >> ~/.bashrc && \
-    echo "conda activate base" >> ~/.bashrc
+    wget https://github.com/mariafiruleva/scn_source/blob/master/environment.yml && \
+    conda env create -f environment.yml && \
+    echo "conda activate scn" >> ~/.bashrc
 
 RUN wget https://cf.10xgenomics.com/misc/bamtofastq-1.2.0 && \
     chmod 700 bamtofastq-1.2.0 && \
