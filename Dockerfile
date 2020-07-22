@@ -15,7 +15,9 @@ RUN wget --quiet https://repo.anaconda.com/miniconda/Miniconda2-latest-Linux-x86
     /opt/conda/bin/conda clean -tipsy && \
     ln -s /opt/conda/etc/profile.d/conda.sh /etc/profile.d/conda.sh && \
     echo ". /opt/conda/etc/profile.d/conda.sh" >> ~/.bashrc && \
-    wget https://github.com/mariafiruleva/scn_source/blob/master/environment.yml && \
+    echo "conda activate base" >> ~/.bashrc &&
+
+RUN wget https://github.com/mariafiruleva/scn_source/blob/master/environment.yml && \
     conda env create -f environment.yml && \
     echo "conda activate scn" >> ~/.bashrc
 
